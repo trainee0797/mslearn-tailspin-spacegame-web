@@ -45,17 +45,17 @@ steps:
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build the project -${{parameters.buildConfiguration}}'
+  displayName: 'Build the project -$(buildConfiguration)'
   inputs:
     command: 'build'
-    arguments: '--no-restore --configuration ${{parameters.buildConfiguration}}'
+    arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Publish the project -${{parameters.buildConfiguration}}'
+  displayName: 'Publish the project -$(buildConfiguration)'
   inputs:
     command: 'publish'
-    arguments: '--no-build --configuration ${{parameters.buildConfiguration}} --output $(Build.ArtifactStagingDirectory)/${{parameters.buildConfiguration}}'
+    arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
